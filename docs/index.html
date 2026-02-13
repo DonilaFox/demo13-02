@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Жохов Даниил — Портфолио</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Сброс стилей и базовые настройки */
+        /* Сброс и базовые настройки */
         * {
             margin: 0;
             padding: 0;
@@ -13,19 +14,36 @@
         }
 
         :root {
-            --primary: #0057b8; /* Цвет ИТМО */
-            --secondary: #ffd700; /* Золотой акцент */
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --text: #333;
+            --primary: #00c6ff;
+            --secondary: #0072ff;
+            --accent: #ff2d75;
+            --dark: #0f0c29;
+            --light: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.08);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--light);
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: var(--light);
+            background: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(0, 198, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 45, 117, 0.1) 0%, transparent 20%);
+            z-index: -1;
         }
 
         .container {
@@ -37,38 +55,61 @@
 
         /* Шапка сайта */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(15, 12, 41, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.2rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
+            color: var(--light);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -80,122 +121,206 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
             padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,198,255,0.15) 0%, transparent 70%);
+            transform: rotate(30deg);
+            z-index: -1;
         }
 
         .hero-content {
-            max-width: 650px;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
         }
 
         .hero h2 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #555;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 1.8rem;
+            color: var(--light);
+            font-weight: 600;
         }
 
         .highlight {
-            color: var(--primary);
-            font-weight: bold;
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
         }
 
         .btn {
-            display: inline-block;
-            background-color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient);
             color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 14px 36px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 114, 255, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: transparent;
-            color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,87,184,0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 114, 255, 0.5);
+        }
+
+        .btn i {
+            font-size: 1.2em;
         }
 
         /* Основной контент */
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
+            position: relative;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: var(--dark);
+            margin-bottom: 4rem;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
         .about-content {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            flex: 1;
+            align-items: start;
         }
 
         .about-text p {
+            margin-bottom: 1.8rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 198, 255, 0.25);
+        }
+
+        .interests h3, .team h3 {
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .interests {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .interests h3 {
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .interests ul {
+        .interests ul, .team-info {
             list-style-type: none;
         }
 
-        .interests li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #eee;
+        .interests li, .team-detail {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
         }
 
-        .interests li:last-child {
+        .interests li:last-child, .team-detail:last-child {
             border-bottom: none;
         }
 
-        .interests li::before {
-            content: "🏒";
-            margin-right: 10px;
-            font-size: 1.2em;
+        .interests li:hover, .team-detail:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .team-icon {
+            font-size: 1.4em;
+            color: var(--accent);
+        }
+
+        .locomotive-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff2d75, #ff6b6b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(255, 45, 117, 0.4);
         }
 
         /* Футер */
         footer {
-            background-color: var(--dark);
-            color: white;
+            background: rgba(7, 5, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
@@ -203,41 +328,88 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
         }
 
         .social-links a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass);
+            color: var(--light);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .social-links a:hover {
-            transform: translateY(-3px);
-            color: var(--secondary);
+            background: var(--gradient);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
 
         /* Адаптивность */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero h2 {
-                font-size: 1.5rem;
-            }
-
+        @media (max-width: 900px) {
             .about-content {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
             .footer-content {
                 flex-direction: column;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -250,6 +422,7 @@
                 <a href="#" class="logo">DonilaFox</a>
                 <div class="nav-links">
                     <a href="#about">Обо мне</a>
+                    <a href="#hockey">Хоккей</a>
                     <a href="#contact">Контакты</a>
                 </div>
             </nav>
@@ -261,9 +434,11 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Жохов Даниил</h1>
-                <h2>Бакалавр первого курса ИТМО</h2>
-                <p>Студент <span class="highlight">Университета ИТМО</span>, увлечённый программированием и хоккеем. Ник в сети: <span class="highlight">DonilaFox</span>.</p>
-                <a href="#about" class="btn">Узнать больше</a>
+                <h2>Студент ИТМО • Хоккейный фанат • DonilaFox</h2>
+                <p>Бакалавр первого курса Университета ИТМО, увлечённый программированием и страстный поклонник хоккея. Моя душа болеет за легендарный <span class="highlight">Локомотив Ярославль</span>!</p>
+                <a href="#hockey" class="btn">
+                    <i class="fas fa-hockey-puck"></i> Узнать о моих интересах
+                </a>
             </div>
         </div>
     </section>
@@ -274,19 +449,55 @@
             <h2 class="section-title">Обо мне</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Привет! Меня зовут Даниил, я студент первого курса бакалавриата в одном из ведущих технических вузов России — Университете ИТМО.</p>
-                    <p>В свободное время увлекаюсь хоккеем — как просмотром матчей, так и игрой на льду. Слежу за всеми крупными турнирами и поддерживаю сборную России.</p>
-                    <p>Постоянно изучаю новые технологии и стремлюсь развиваться в сфере IT. Открыт к интересным проектам и коллаборациям!</p>
+                    <p>Привет! Я Даниил, студент первого курса бакалавриата в одном из самых престижных технических вузов России — Университете ИТМО.</p>
+                    <p>С детства увлечён хоккеем — слежу за всеми турнирами, анализирую игры и никогда не пропускаю матчи своей любимой команды. Программирование для меня — это не только учёба, но и страсть к созданию чего-то нового.</p>
+                    <p>Всегда открыт к интересным проектам, коллаборациям и обмену идеями. Верьте в мечты — как верит в победу «Локомотив»!</p>
                 </div>
-                <div class="interests">
-                    <h3>Мои интересы</h3>
+                <div class="card interests">
+                    <h3><i class="fas fa-star"></i> Мои интересы</h3>
                     <ul>
-                        <li>Хоккей</li>
-                        <li>Программирование</li>
-                        <li>Киберспорт</li>
-                        <li>Технологии</li>
-                        <li>Искусственный интеллект</li>
+                        <li><i class="fas fa-laptop-code"></i> Программирование</li>
+                        <li><i class="fas fa-robot"></i> Искусственный интеллект</li>
+                        <li><i class="fas fa-gamepad"></i> Киберспорт</li>
+                        <li><i class="fas fa-microchip"></i> Новые технологии</li>
+                        <li><i class="fas fa-book"></i> Саморазвитие</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Хоккейная секция -->
+    <section id="hockey" style="background: rgba(10, 8, 30, 0.6);">
+        <div class="container">
+            <h2 class="section-title">Мой хоккей</h2>
+            <div class="about-content">
+                <div class="card team">
+                    <h3><i class="fas fa-trophy team-icon"></i> Любимая команда</h3>
+                    <div class="team-detail">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <strong>Локомотив Ярославль</strong>
+                            <div class="locomotive-badge">С 1990 года в КХЛ</div>
+                        </div>
+                    </div>
+                    <div class="team-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>Ярославль, Россия</div>
+                    </div>
+                    <div class="team-detail">
+                        <i class="fas fa-history"></i>
+                        <div>Чемпион России (1997, 2002, 2003)</div>
+                    </div>
+                    <div class="team-detail">
+                        <i class="fas fa-heart"></i>
+                        <div>Болею с детства — команда моего сердца!</div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p>«Локомотив Ярославль» — это не просто хоккейный клуб, а символ города и гордость всей Ярославской области. Команда с богатой историей, трагедией 2011 года и невероятной силой духа.</p>
+                    <p>Я восхищаюсь игрой таких легенд, как Павел Буре, Алексей Яшин и современных звёзд вроде Артура Каюмова. Каждый матч «Локо» для меня — праздник!</p>
+                    <p>Мечтаю однажды посетить «Арену 2000» и увидеть игру своей любимой команды вживую. Железная дорога — навсегда! 🚂</p>
                 </div>
             </div>
         </div>
@@ -300,42 +511,19 @@
                     <p>&copy; 2026 Жохов Даниил (DonilaFox). Все права защищены.</p>
                 </div>
                 <div class="social-links">
-                    <!-- Здесь можно добавить реальные ссылки на соцсети позже -->
-                    <a href="#" title="GitHub">🐱‍💻</a>
-                    <a href="#" title="Telegram">✈️</a>
-                    <a href="#" title="Email">✉️</a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Простая анимация при прокрутке
+        // Анимации при прокрутке
         document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Анимация для секций
-            document.querySelectorAll('section').forEach(section => {
-                section.style.opacity = 0;
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(section);
-            });
-
-            // Плавная прокрутка по якорям
+            // Плавная прокрутка
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -347,6 +535,42 @@
                         });
                     }
                 });
+            });
+
+            // Анимация появления элементов
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Анимация для карточек и текста
+            document.querySelectorAll('.card, .about-text').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+
+            // Параллакс эффект для фона
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                document.body.style.backgroundPositionY = -scrollPosition * 0.3 + 'px';
+            });
+        });
+    </script>
+</body>
+</html>
             });
         });
     </script>
